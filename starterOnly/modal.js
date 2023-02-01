@@ -1,36 +1,77 @@
-// Pas de modif mais var n'est plus utilisé - x c'est quoi ?
-function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
+// Main function 
+// Create variable of what i need, add a click event and call the function formValidate() 
+function main() {
+    const modalBtn = document.querySelectorAll(".modal-btn");
+    const closeBtn = document.querySelectorAll(".close");
+
+    modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+    closeBtn.forEach((btn) => btn.addEventListener("click", closeModal));
+
+    FormValidate();
 }
 
-// DOM Elements
-const modalbg = document.querySelector(".bground");
-const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
-const closeBtn = document.querySelector(".close");
+main();
 
-// launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+// Function for validate or not the form
+function FormValidate() {
+    const submitBtn = document.getElementById('submit');
 
-// launch modal form
+    submitBtn.addEventListener('click', function (event) {
+        const formData = document.querySelectorAll(".formData");
+        event.preventDefault();
+        if (validate(formData)) {
+            showValidation();
+        } else {
+            alert("Il y a un problème")
+        }
+    })
+
+}
+
+// ----------------- ERRORS FUNCTIONS ----------------- // 
+// Function for error messages
+const displayErrorMsg = (element, message) => {
+    const formData = element
+    formData.setAttribute("data-error", message)
+    formData.setAttribute("data-error-visible", true)
+}
+
+// Function for remove one error msg
+const removeErrorMsg = (element) => {
+    const formData = element
+    formData.removeAttribute('data-error')
+    formData.removeAttribute('data-error-visible')
+}
+
+// ----------------- MODAL FUNCTIONS & EVENTS ----------------- // 
+// Functions for modal
 function launchModal() {
-  modalbg.style.display = "block";
+    const modalbg = document.querySelector(".bground");
+    modalbg.style.display = "block";
+
 }
 
-// Close modal btn
-closeBtn.addEventListener("click", () => {
-  modalbg.style.display = "none";
-})
-
-/* Exemple à ne pas faire (vieille méthode) 
-ajoute un listener à toute la page alors qu'on a besoin que du bouton (quand je clique partout sur la page la console renvoie l'info)
-window.onclick = function (event) {
-  if (event.target == closeBtn) {
+// Function for close modal
+function closeModal() {
+    const modalbg = document.querySelector(".bground");
     modalbg.style.display = "none";
-  }
-} */
+}
+
+// Close validation event
+const closeBtn = document.querySelector("span.close");
+const closeValidation = document.querySelector("button.btn-close");
+
+closeBtn.addEventListener("click", closeModal);
+closeValidation.addEventListener("click", closeModal);
+
+
+// ----------------- NAV FUNCTION ----------------- // 
+// Function edit nav for responsive
+function editNav() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}

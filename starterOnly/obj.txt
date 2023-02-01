@@ -1,0 +1,5 @@
+1. Enlever les messages d'erreur pour fork la 2eme consigne 
+2. Continuer a 2eme consigne : radio & checkbox 
+3. Fork la 2eme consigne 
+4. Remettre les msg d'erreur 
+5. Faire le remove attribute 
