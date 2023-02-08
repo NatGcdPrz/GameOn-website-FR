@@ -41,27 +41,44 @@ function validate(formData) {
     // First name
     if (!formData[0].children[2].value.match(stringRegex) || formData[0].children[2].value.length < 2) {
         isFormValid = false;
+        displayErrorMsg(formData[0], "Le prénom doit comporter au moins 2 caractères");
+    } else {
+        removeErrorMsg(formData[0]);
     }
 
     ///Last name
     if (!formData[1].children[2].value.match(stringRegex) || formData[1].children[2].value.length < 2) {
         isFormValid = false;
+
+        displayErrorMsg(formData[1], "Le prénom doit comporter au moins 2 caractères");
+    } else {
+        removeErrorMsg(formData[1]);
     }
 
     // Check email is valid
     if (!formData[2].children[2].value.match(regexEmail)) {
         isFormValid = false;
+
+        displayErrorMsg(formData[2], "Veuillez entrer un email valide");
+    } else {
+        removeErrorMsg(formData[2]);
     }
 
     // Check the birthdate
     if (!formData[3].children[2].value.match(regexBirthDate)) {
         isFormValid = false;
+        displayErrorMsg(formData[3], "La date de naissance entrée est invalide");
+    } else {
+        removeErrorMsg(formData[3]);
     }
 
     // Check number is valid
     // Need a number not a string
     if (formData[4].children[2].value === "") {
         isFormValid = false;
+        displayErrorMsg(formData[4], "Veuillez entrer une valeur numérique ");
+    } else {
+        removeErrorMsg(formData[4]);
     }
 
     // Check radio btn
@@ -75,12 +92,18 @@ function validate(formData) {
 
     if (!citySelectionned) {
         isFormValid = false;
+        displayErrorMsg(formData[5], "Veuillez choisir une ville");
+    } else {
+        removeErrorMsg(formData[5]);
     }
 
     // Check cgu
     // Need to checked the cgu
     if (!(document.querySelector("#checkbox1").checked)) {
         isFormValid = false;
+        displayErrorMsg(formData[6], "Acceptez les conditions d'utilisation avant de poursuivre");
+    } else {
+        removeErrorMsg(formData[6]);
     }
 
     // Check previous error
@@ -91,6 +114,20 @@ function validate(formData) {
     }
 }
 
+// ----------------- ERRORS FUNCTIONS ----------------- // 
+// Function for error messages
+const displayErrorMsg = (element, message) => {
+    const formData = element
+    formData.setAttribute("data-error", message)
+    formData.setAttribute("data-error-visible", true)
+}
+
+// Function for remove one error msg
+const removeErrorMsg = (element) => {
+    const formData = element
+    formData.removeAttribute('data-error')
+    formData.removeAttribute('data-error-visible')
+}
 
 // ----------------- MODAL FUNCTIONS & EVENTS ----------------- // 
 // Functions for modal
