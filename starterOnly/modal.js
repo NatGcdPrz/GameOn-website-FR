@@ -28,6 +28,7 @@ function FormValidate() {
 
 }
 
+// ----------------- VALIDATION FUNCTION WITH REGEX AND ERROR ----------------- // 
 // Function for validation
 function validate(formData) {
 
@@ -150,6 +151,15 @@ const closeValidation = document.querySelector("button.btn-close");
 closeBtn.addEventListener("click", closeModal);
 closeValidation.addEventListener("click", closeModal);
 
+// ----------------- VALIDATION FUNCTION ----------------- // 
+// Display validation message
+const validation = document.querySelector(".validation");
+const formContent = document.querySelector("form");
+
+function showValidation() {
+    formContent.style.display = "none";
+    validation.style.display = "block";
+}
 
 // ----------------- NAV FUNCTION ----------------- // 
 // Function edit nav for responsive
