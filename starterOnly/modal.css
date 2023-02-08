@@ -488,6 +488,7 @@ footer {
   margin: 0 20px;
 }
 
+/* RESPONSIVE */
 @media screen and (max-width: 800px) {
 
   .topnav a {
