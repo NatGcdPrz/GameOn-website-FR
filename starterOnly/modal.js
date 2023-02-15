@@ -15,12 +15,16 @@ main();
 // Function for validate or not the form
 function FormValidate() {
     const submitBtn = document.getElementById('submit');
+    const form = document.getElementById('form');
 
     submitBtn.addEventListener('click', function (event) {
         const formData = document.querySelectorAll(".formData");
+
         event.preventDefault();
         if (validate(formData)) {
             showValidation();
+            console.log(form);
+            form.reset();
         } else {
             alert("Il y a un problème")
         }
@@ -75,9 +79,9 @@ function validate(formData) {
 
     // Check number is valid
     // Need a number not a string
-    if (formData[4].children[2].value === "") {
+    if (formData[4].children[2].value === "" || formData[4].children[2].value > 100) {
         isFormValid = false;
-        displayErrorMsg(formData[4], "Veuillez entrer une valeur numérique ");
+        displayErrorMsg(formData[4], "Veuillez entrer une valeur numérique, inférieure ou égale à 100 ");
     } else {
         removeErrorMsg(formData[4]);
     }
@@ -112,7 +116,7 @@ function validate(formData) {
         return true;
     } else {
         return false;
-    }
+    };
 }
 
 // ----------------- ERRORS FUNCTIONS ----------------- // 
@@ -135,13 +139,14 @@ const removeErrorMsg = (element) => {
 function launchModal() {
     const modalbg = document.querySelector(".bground");
     modalbg.style.display = "block";
-
 }
 
 // Function for close modal
 function closeModal() {
     const modalbg = document.querySelector(".bground");
     modalbg.style.display = "none";
+
+    hideValidation();
 }
 
 // Close validation event
@@ -150,6 +155,7 @@ const closeValidation = document.querySelector("button.btn-close");
 
 closeBtn.addEventListener("click", closeModal);
 closeValidation.addEventListener("click", closeModal);
+
 
 // ----------------- VALIDATION FUNCTION ----------------- // 
 // Display validation message
@@ -161,10 +167,15 @@ function showValidation() {
     validation.style.display = "block";
 }
 
+function hideValidation() {
+    formContent.style.display = "block";
+    validation.style.display = "none";
+}
+
 // ----------------- NAV FUNCTION ----------------- // 
 // Function edit nav for responsive
 function editNav() {
-    var x = document.getElementById("myTopnav");
+    let x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
         x.className += " responsive";
     } else {
